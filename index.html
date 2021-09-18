@@ -1,1 +1,50 @@
-Hello xiaoyu.li
+<!DOCTYPE html>
+<html>
+<head>
+  <title>XiaoYu.Li</title>
+  <meta name="keywords" content="xiaoyu.li">
+  <meta name="description" content="xiaoyu.li">
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta id="viewport" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <meta content="always" name="referrer">
+  <meta name="format-detection" content="telphone=no,email=no"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link rel="icon shortcut bookmark" type="image/ico" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+  <style type="text/css">
+    html { font-size: 100px }
+    html, body {
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <iframe src="https://www.lingobus.com/games/2018q1/pinyin/" frameborder="0"></iframe>
+  <script type="text/javascript">
+    (function() {
+      var w = window.screen.availWidth || window.screen.width;
+      if (w < 640) {
+        document.documentElement.style.fontSize = (w / 4) + 'px';
+      } else if (w <= 1280) {
+        document.getElementById('viewport').content = 'width=1280';
+      } else if (w > 2560) {
+        document.documentElement.style.fontSize = (w / 25.6) + 'px';
+      }
+      window.setTimeout(function() {
+        if (document.body.className.indexOf('-ready-') === -1) {
+          document.body.className = '-error-';
+          document.body.addEventListener('click', function() {
+            window.location.reload();
+          });
+        }
+      }, 1e4);
+    })();
+  </script>
+</body>
+</html>
