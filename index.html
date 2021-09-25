@@ -10,6 +10,7 @@
   <meta name="format-detection" content="telphone=no,email=no"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <link rel="icon shortcut bookmark" type="image/ico" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <style type="text/css">
     html { font-size: 100px }
     html, body {
@@ -25,7 +26,24 @@
   </style>
 </head>
 <body>
-  <iframe src="https://www.lingobus.com/games/2018q1/pinyin/" frameborder="0"></iframe>
+  <div id="app">
+    <el-button @click="visible = true">Button</el-button>
+    <el-dialog :visible.sync="visible" title="Hello world">
+      <p>Try Element</p>
+    </el-dialog>
+    <!-- 胜率
+盈利率
+亏损率
+
+夏普率
+盈亏比
+胜负比
+凯利比例
+平均波动率
+平均盈利率
+盈利率数学期望
+xiaoyu.li推荐分 -->
+  </div>
   <script type="text/javascript">
     (function() {
       var w = window.screen.availWidth || window.screen.width;
@@ -45,6 +63,16 @@
         }
       }, 1e4);
     })();
+  </script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: function() {
+        return { visible: false }
+      }
+    })
   </script>
 </body>
 </html>
