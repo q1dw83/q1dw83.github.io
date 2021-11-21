@@ -10,45 +10,168 @@
   <meta name="format-detection" content="telphone=no,email=no"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <link rel="icon shortcut bookmark" type="image/ico" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.6/lib/theme-chalk/index.css">
   <style type="text/css">
-    html { font-size: 100px }
-    html, body {
-      background-color: #fff;
-      margin: 0;
-      padding: 0;
-      height: 100%;
+    html{font-size:100px}
+    html,body{background-color:#fff;margin:0;padding:0;height:100%}
+    @keyframes hobbit_startup_loading{0%{visibility:visible;transform:rotate(0)}100%{transform:rotate(360deg)}}
+    #hobbit_loading{display:block;position:relative;top:50%;margin:-50px auto;width:100px;height:100px}
+    #hobbit_loading::before,#hobbit_loading::after{content:'';position:absolute;border-radius:50%;border:2px solid #fff;box-sizing:border-box;visibility:hidden;animation:hobbit_startup_loading 1s linear 1s infinite}
+    body.-error-::before{content:'Network error,click to reload';position:absolute;display:block;top:0;bottom:0;left:0;right:0;margin:auto;width:300px;height:40px;padding-top:160px;background:url(//s.vipkidstatic.com/fe-static/hobbit/asset/res/image/error-v4.png) no-repeat center top;background-size:100%;font-size:24px;text-align:center;cursor:pointer}
+    body.-error- #hobbit_loading,body.-ready- #hobbit_loading,.-seo-{display:none}
+    #hobbit_loading::before{border-color:#df1317 transparent;width:80%;height:80%;top:10%;left:10%}
+    #hobbit_loading::after{border-color:transparent #e4934b;width:60%;height:60%;top:20%;left:20%;animation-direction:reverse}
+    #hobbit_app{display:none}
+    body.-ready- #hobbit_app{display:block}
+    .el-input-number { width: 1.2rem; }
+    .el-input-number input { text-align: right !important; }
+    .el-radio { margin-right: 0.15rem; }
+    .el-radio__label { padding-left: 0.05rem; }
+    .page-wrapper {
+      max-width: 8rem;
+      position: relative;
+      top: 0.15rem;
+      margin: 0 auto;
+      padding: 0.15rem;
+      background-color:#fff;
+      border: 1px solid #ddd;
+      box-shadow: 2px 2px 15px 0 #ddd;
+      font-family: Arial, Helvetica, sans-serif;
     }
-    iframe {
-      height: 100%;
+    .view-m .page-wrapper {
+      top: 0;
+      border: 0;
+      box-shadow: none;
+    }
+    .page-wrapper header {
+      font-size: 0.2rem;
+      text-align: left;
+      padding: 0 0 0.05rem;
+    }
+    .page-wrapper dl {
+      display: flex;
+      align-items: center;
+      font-size: 0.14rem;
+      margin: 0.15rem 0;
+    }
+    .page-wrapper dl dt {
+      flex: 0 0 0.75rem;
+      font-size: 0.14rem;
+      margin: 0;
+    }
+    .page-wrapper dl dd {
+      margin: 0;
+      text-align: left;
+    }
+    .page-wrapper dl dd.value {
+      flex: 0 0 1.2rem;
+    }
+    .page-wrapper dl dd.tip {
+      flex: auto;
+      text-align: left;
+      font-size: 0.12rem;
+      padding-left: 0.15rem;
+    }
+    .page-wrapper .ok {
+      position: relative;
+      width: 200px;
+      margin: 0.3rem auto 0;
+    }
+    .page-wrapper .ok span {
+      position: absolute;
       width: 100%;
+      top: 50px;
+      text-align: center;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
-  <div id="app">
-    <el-button @click="visible = true">Button</el-button>
-    <el-dialog :visible.sync="visible" title="Hello world">
-      <p>Try Element</p>
-    </el-dialog>
-    <!-- 胜率
-盈利率
-亏损率
-
-夏普率
-盈亏比
-胜负比
-凯利比例
-平均波动率
-平均盈利率
-盈利率数学期望
-xiaoyu.li推荐分 -->
+  <div id="hobbit_loading"></div>
+  <div id="hobbit_app">
+    <article class="page-wrapper">
+      <header>OK值计算</header>
+      <dl>
+        <dt>胜<i style="margin-right: 2em"></i>率:</dt>
+        <dd class="value"><el-input-number v-model="odds" :min="0" :max="100" :step="1" size="mini"></el-input-number></dd>
+        <dd class="tip">百分比, 获胜的概率</dd>
+      </dl>
+      <dl>
+        <dt>盈亏单位:</dt>
+        <dd class="value">
+          <el-radio v-model="mode" label="RATIO">百分比</el-radio>
+          <el-radio v-model="mode" label="YUAN">元</el-radio>
+        </dd>
+      </dl>
+      <template v-if="mode === 'RATIO'">
+        <dl>
+          <dt>盈<i style="margin-right: 0.5em"></i>利<i style="margin-right: 0.5em"></i>率:</dt>
+          <dd class="value"><el-input-number v-model="win" :min="0" :step="1" size="mini"></el-input-number></dd>
+          <dd class="tip">百分比, 获胜时盈利的比例</dd>
+        </dl>
+        <dl>
+          <dt>亏<i style="margin-right: 0.5em"></i>损<i style="margin-right: 0.5em"></i>率:</dt>
+          <dd class="value"><el-input-number v-model="loss" :min="0" :step="1" size="mini"></el-input-number></dd>
+          <dd class="tip">百分比, 失败时亏损的比例</dd>
+        </dl>
+      </template>
+      <template v-else>
+        <dl>
+          <dt>本<i style="margin-right: 2em"></i>金:</dt>
+          <dd class="value"><el-input-number v-model="capital" :min="0" :step="1" size="mini"></el-input-number></dd>
+          <dd class="tip">元(>=0), 获胜时盈利的比例</dd>
+        </dl>
+        <dl>
+          <dt>盈<i style="margin-right: 0.5em"></i>利<i style="margin-right: 0.5em"></i>额:</dt>
+          <dd class="value"><el-input-number v-model="win$" :min="0" :step="1" size="mini"></el-input-number></dd>
+          <dd class="tip">元(>=0), 获胜时盈利的金额</dd>
+        </dl>
+        <dl>
+          <dt>亏<i style="margin-right: 0.5em"></i>损<i style="margin-right: 0.5em"></i>额:</dt>
+          <dd class="value"><el-input-number v-model="loss$" :min="0" :step="1" size="mini"></el-input-number></dd>
+          <dd class="tip">元(>=0), 失败时亏损的金额</dd>
+        </dl>
+      </template>
+      <dl>
+        <dt>周<i style="margin-right: 2em"></i>期: </dt>
+        <dd class="value">
+          <el-input-number v-model="period" :min="1" :step="1" size="mini"></el-input-number>
+        </dd>
+        <dd class="tip">天(>=1), 投资回报所用天数</dd>
+      </dl>
+      <dl>
+        <dt>复利期数:</dt>
+        <dd class="value">
+          <el-input-number v-model="cycles" :min="1" :step="1" size="mini"></el-input-number>
+        </dd>
+        <dd class="tip">期(>=1), 不可复利时为1</dd>
+      </dl>
+      <dl>
+        <dt>凯<i style="margin-right: 0.5em"></i>利<i style="margin-right: 0.5em"></i>值:</dt>
+        <dd class="value">
+          {{($kelly * 100.0).toFixed(2)}}%
+        </dd>
+      </dl>
+      <dl>
+        <dt>平均年化:</dt>
+        <dd class="value">
+          {{($rate * 100.0).toFixed(2)}}%
+        </dd>
+      </dl>
+      <div class="ok">
+        <span>OK值</span>
+        <el-progress type="dashboard" :percentage="$OKProgress" :stroke-width="10"
+          :color="okColors" :width="200" :format="okFormat">
+        </el-progress>
+      </div>
+    </article>
   </div>
   <script type="text/javascript">
     (function() {
       var w = window.screen.availWidth || window.screen.width;
       if (w < 640) {
         document.documentElement.style.fontSize = (w / 4) + 'px';
+        document.body.className = 'view-m';
       } else if (w <= 1280) {
         document.getElementById('viewport').content = 'width=1280';
       } else if (w > 2560) {
@@ -64,14 +187,96 @@ xiaoyu.li推荐分 -->
       }, 1e4);
     })();
   </script>
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui@2.15.6/lib/index.js"></script>
   <script>
-    new Vue({
-      el: '#app',
+    window.$hobbit = new Vue({
+      el: '#hobbit_app',
       data: function() {
-        return { visible: false }
-      }
+        return {
+          mode: 'RATIO',
+          odds: 70,
+          win: 30,
+          loss: 10,
+          capital: 10000,
+          win$: 3000,
+          loss$: 1000,
+          period: 365,
+          cycles: 1,
+          dashboardColors: [
+            {color: '#f86364', percentage: 25},
+            {color: '#e39a3f', percentage: 50},
+            {color: '#408ffb', percentage: 75},
+            {color: '#4dbc3c', percentage: 100},
+          ],
+        }
+      },
+      computed: {
+        $OKProgress() {
+          const ok = this.$OK;
+          if (ok >= 1) return 100;
+          if (ok <= 0) return 0;
+          return ok * 100;
+        },
+        $OK() {
+          return this.$rate * Math.max(this.$kelly, 0);
+        },
+        // 凯利值 = 胜率 - (1 - 胜率) / 盈亏比
+        $kelly() {
+          return this.$odds - (1 - this.$odds) / this.$PLR;
+        },
+        // 盈亏比(赔率)
+        $PLR() {
+          return Math.max(this.$win, Number.EPSILON) / Math.max(this.$loss, Number.EPSILON);
+        },
+        // 年化收益率
+        $rate() {
+          if (this.$cycles === 1) return this.$exp * 365.0 / this.$period;
+          return (Math.pow(1 + this.$geo, this.$cycles) - 1) / this.$cycles * 365.0 / this.$period;
+        },
+        // 算数平均收益率 = 胜率 * 盈利率 - (1 - 胜率) * 亏损率
+        $exp() {
+          return this.$odds * this.$win - (1 - this.$odds) * this.$loss;
+        },
+        // 几何平均收益率 = (1 + 盈利率) ^ 胜率 * (1 - 亏损率) ^ (1 - 胜率) - 1
+        $geo() {
+          return Math.pow(1 + this.$win, this.$odds) * Math.pow(1 - this.$loss, 1 - this.$odds) - 1;
+        },
+        $cycles() {
+          return Math.max(this.cycles, 1);
+        },
+        $period() {
+          return Math.max(this.period, 1);
+        },
+        $odds() {
+          return Math.min(Math.max(this.odds / 100.0, 0), 100);
+        },
+        $win() {
+          if (this.mode === 'YUAN') {
+            return Math.max(this.win$, 0) / Math.max(this.capital, Number.EPSILON);
+          }
+          return parseFloat(this.win / 100.0);
+        },
+        $loss() {
+          if (this.mode === 'YUAN') {
+            return Math.min(Math.max(this.loss$, 0) / Math.max(this.capital, Number.EPSILON), 1);
+          }
+          return parseFloat(this.loss / 100.0);
+        }
+      },
+      created() {
+        document.body.className += ' -ready-';
+      },
+      methods: {
+        okFormat() {
+          return `${(this.$OK * 100.0).toFixed(2)}%`;
+        },
+        okColors(v) {
+          const r = 255 - v * 2;
+          const g = v * 2 + 55;
+          return `rgb(${r},${g},0)`;
+        },
+      },
     })
   </script>
 </body>
