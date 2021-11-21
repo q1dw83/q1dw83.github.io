@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.6/lib/theme-chalk/index.css">
   <style type="text/css">
     html{font-size:100px}
-    html,body{background-color:#fff;margin:0;padding:0;height:100%}
+    html,body{background-color:#eee;margin:0;padding:0;height:100%}
     @keyframes hobbit_startup_loading{0%{visibility:visible;transform:rotate(0)}100%{transform:rotate(360deg)}}
     #hobbit_loading{display:block;position:relative;top:50%;margin:-50px auto;width:100px;height:100px}
     #hobbit_loading::before,#hobbit_loading::after{content:'';position:absolute;border-radius:50%;border:2px solid #fff;box-sizing:border-box;visibility:hidden;animation:hobbit_startup_loading 1s linear 1s infinite}
@@ -28,7 +28,7 @@
     .el-radio { margin-right: 0.15rem; }
     .el-radio__label { padding-left: 0.05rem; }
     .page-wrapper {
-      max-width: 8rem;
+      max-width: 4rem;
       position: relative;
       top: 0.2rem;
       margin: 0 auto;
@@ -140,11 +140,17 @@
         <dd class="tip">天(>=1), 投资回报所用天数</dd>
       </dl>
       <dl>
+        <dt>支持复利:</dt>
+        <dd class="value">
+          <el-switch v-model="supportCycle"></el-switch>
+        </dd>
+      </dl>
+      <dl v-show="supportCycle">
         <dt>复利期数:</dt>
         <dd class="value">
           <el-input-number v-model="cycles" :min="1" :step="1" size="mini"></el-input-number>
         </dd>
-        <dd class="tip">期(>=1), 不可复利时为1</dd>
+        <dd class="tip">期(>=1)</dd>
       </dl>
       <dl>
         <dt>凯<i style="margin-right: 0.5em"></i>利<i style="margin-right: 0.5em"></i>值:</dt>
@@ -202,6 +208,7 @@
           win$: 3000,
           loss$: 1000,
           period: 365,
+          supportCycle: false,
           cycles: 1,
         }
       },
@@ -225,8 +232,8 @@
         },
         // 年化收益率
         $rate() {
-          if (this.$cycles === 1) return this.$exp * 365.0 / this.$period;
-          return (Math.pow(1 + this.$geo, this.$cycles) - 1) / this.$cycles * 365.0 / this.$period;
+          if (this.supportCycle) return (Math.pow(1 + this.$geo, this.$cycles) - 1) / this.$cycles * 365.0 / this.$period;
+          return this.$exp * 365.0 / this.$period;
         },
         // 算数平均收益率 = 胜率 * 盈利率 - (1 - 胜率) * 亏损率
         $exp() {
