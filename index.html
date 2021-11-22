@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>XiaoYu.Li</title>
+  <title>AK47.XYZ</title>
   <meta name="keywords" content="xiaoyu.li">
   <meta name="description" content="xiaoyu.li">
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -13,7 +13,24 @@
   <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.6/lib/theme-chalk/index.css">
   <style type="text/css">
     html{font-size:100px}
-    html,body{background-color:#eee;margin:0;padding:0;height:100%}
+    body{
+      background-color:#eee;
+      margin:0;
+      padding:0;
+      height:100%;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    }
+    input, select, textarea {
+      user-select: text !important;
+      outline: medium;
+    }
+    input[type=text], input[type=tel], input[type=password], input[type=search] {
+      -webkit-appearance: none;
+    }
     @keyframes hobbit_startup_loading{0%{visibility:visible;transform:rotate(0)}100%{transform:rotate(360deg)}}
     #hobbit_loading{display:block;position:relative;top:50%;margin:-50px auto;width:100px;height:100px}
     #hobbit_loading::before,#hobbit_loading::after{content:'';position:absolute;border-radius:50%;border:2px solid #fff;box-sizing:border-box;visibility:hidden;animation:hobbit_startup_loading 1s linear 1s infinite}
@@ -46,13 +63,13 @@
     .page-wrapper header {
       font-size: 0.2rem;
       text-align: left;
-      padding: 0 0 0.05rem;
+      padding: 0.1rem 0 0 0;
     }
     .page-wrapper dl {
       display: flex;
       align-items: center;
       font-size: 0.14rem;
-      margin: 0.15rem 0;
+      margin: 0.22rem 0;
     }
     .page-wrapper dl dt {
       flex: 0 0 0.75rem;
@@ -72,12 +89,12 @@
       font-size: 0.12rem;
       padding-left: 0.15rem;
     }
-    .page-wrapper .ok {
+    .page-wrapper .ak {
       position: relative;
       width: 200px;
       margin: 0.3rem auto 0;
     }
-    .page-wrapper .ok span {
+    .page-wrapper .ak span {
       position: absolute;
       width: 100%;
       top: 50px;
@@ -90,7 +107,7 @@
   <div id="hobbit_loading"></div>
   <div id="hobbit_app">
     <article class="page-wrapper">
-      <header>OK值计算</header>
+      <header>AK值计算</header>
       <dl>
         <dt>胜<i style="margin-right: 2em"></i>率:</dt>
         <dd class="value"><el-input-number v-model="odds" :min="0" :max="100" :step="1" size="mini"></el-input-number></dd>
@@ -164,10 +181,10 @@
           {{($rate * 100.0).toFixed(2)}}%
         </dd>
       </dl>
-      <div class="ok">
-        <span>OK值</span>
-        <el-progress type="dashboard" :percentage="$OKProgress" :stroke-width="10"
-          :color="okColors" :width="200" :format="okFormat">
+      <div class="ak">
+        <span>AK值</span>
+        <el-progress type="dashboard" :percentage="$AK" :stroke-width="10"
+          :color="akColors" :width="200" :format="akFormat">
         </el-progress>
       </div>
     </article>
@@ -213,14 +230,9 @@
         }
       },
       computed: {
-        $OKProgress() {
-          const ok = this.$OK;
-          if (ok >= 1) return 100;
-          if (ok <= 0) return 0;
-          return ok * 100;
-        },
-        $OK() {
-          return this.$rate * Math.max(this.$kelly, 0);
+        $AK() {
+          const ak = this.$rate * Math.max(this.$kelly, 0);
+          return Math.tanh(ak - 0.1) * 50 + 50;
         },
         // 凯利值 = 胜率 - (1 - 胜率) / 盈亏比
         $kelly() {
@@ -269,10 +281,10 @@
         document.body.className += ' -ready-';
       },
       methods: {
-        okFormat() {
-          return `${(this.$OK * 100.0).toFixed(2)}%`;
+        akFormat() {
+          return this.$AK.toFixed(2);
         },
-        okColors(v) {
+        akColors(v) {
           const r = 255 - v * 2;
           const g = v * 2 + 55;
           return `rgb(${r},${g},0)`;
