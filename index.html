@@ -12,7 +12,7 @@
   <link rel="icon shortcut bookmark" type="image/ico" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
   <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.6/lib/theme-chalk/index.css">
   <style type="text/css">
-    html{font-size:100px}
+    html{font-size:100px;height:100%;}
     body{
       background-color:#eee;
       margin:0;
@@ -178,7 +178,7 @@
       <dl>
         <dt>平均年化:</dt>
         <dd class="value">
-          {{($rate * 100.0).toFixed(2)}}%
+          {{($avg * 100.0).toFixed(2)}}%
         </dd>
       </dl>
       <div class="ak">
@@ -218,7 +218,7 @@
       data() {
         return {
           mode: 'RATIO',
-          odds: 70,
+          odds: 60,
           win: 30,
           loss: 10,
           capital: 10000,
@@ -231,8 +231,10 @@
       },
       computed: {
         $AK() {
-          const ak = this.$rate * Math.max(this.$kelly, 0);
-          return Math.tanh(ak - 0.1) * 50 + 50;
+          const a = this.$avg;
+          const k = this.$kelly;
+          const ak = Math.abs(a) * Math.abs(k) * (a > 0 && k > 0 ? 1 : -1);
+          return Math.max((Math.tanh(ak) + 1) * 55 - 10, 0);
         },
         // 凯利值 = 胜率 - (1 - 胜率) / 盈亏比
         $kelly() {
@@ -243,7 +245,7 @@
           return Math.max(this.$win, Number.EPSILON) / Math.max(this.$loss, Number.EPSILON);
         },
         // 年化收益率
-        $rate() {
+        $avg() {
           if (this.supportCycle) return (Math.pow(1 + this.$geo, this.$cycles) - 1) / this.$cycles * 365.0 / this.$period;
           return this.$exp * 365.0 / this.$period;
         },
@@ -285,9 +287,8 @@
           return this.$AK.toFixed(2);
         },
         akColors(v) {
-          const r = 255 - v * 2;
-          const g = v * 2 + 55;
-          return `rgb(${r},${g},0)`;
+          if (v < 47) return `rgb(${255 - v},${v + 55},0)`;
+          return `rgb(${255 - v * 2},${v * 2 + 55},0)`;
         },
       },
     })
