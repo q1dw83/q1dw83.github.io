@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html version="2021-11-24">
 <head>
   <title>AK47.XYZ</title>
   <meta name="keywords" content="xiaoyu.li">
@@ -182,7 +182,7 @@
         </dd>
       </dl>
       <div class="ak">
-        <span>AK值</span>
+        <span>AK</span>
         <el-progress type="dashboard" :percentage="$AK" :stroke-width="10"
           :color="akColors" :width="200" :format="akFormat">
         </el-progress>
@@ -217,13 +217,14 @@
       el: '#hobbit_app',
       data() {
         return {
+          CPI_PER_YEAR: 0.06,
           mode: 'RATIO',
-          odds: 60,
-          win: 30,
-          loss: 10,
+          odds: 50,
+          win: 20,
+          loss: 20,
           capital: 10000,
-          win$: 3000,
-          loss$: 1000,
+          win$: 2000,
+          loss$: 2000,
           period: 365,
           supportCycle: false,
           cycles: 1,
@@ -233,15 +234,14 @@
         $AK() {
           const a = this.$avg;
           const k = this.$kelly;
-          const ak = Math.abs(a) * Math.abs(k) * (a > 0 && k > 0 ? 1 : -1);
-          return Math.max((Math.tanh(ak) + 1) * 55 - 10, 0);
+          return Math.tanh(a + k - this.CPI_PER_YEAR) * 50 + 50;
         },
         // 凯利值 = 胜率 - (1 - 胜率) / 盈亏比
         $kelly() {
-          return this.$odds - (1 - this.$odds) / this.$PLR;
+          return this.$odds - (1 - this.$odds) / this.$plr;
         },
         // 盈亏比(赔率)
-        $PLR() {
+        $plr() {
           return Math.max(this.$win, Number.EPSILON) / Math.max(this.$loss, Number.EPSILON);
         },
         // 年化收益率
