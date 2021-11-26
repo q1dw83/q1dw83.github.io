@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html version="2021-11-24">
+<html version="2021-11-26">
 <head>
   <title>AK47.XYZ</title>
   <meta name="keywords" content="xiaoyu.li">
@@ -19,9 +19,10 @@
       padding:0;
       height:100%;
       scroll-behavior: smooth;
+      user-select: none;
+      -webkit-touch-callout: none;
       -webkit-overflow-scrolling: touch;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     }
     input, select, textarea {
@@ -40,8 +41,7 @@
     #hobbit_loading::after{border-color:transparent #e4934b;width:60%;height:60%;top:20%;left:20%;animation-direction:reverse}
     #hobbit_app{display:none}
     body.-ready- #hobbit_app{display:block}
-    .el-input-number { width: 1.2rem; }
-    .el-input-number input { text-align: right !important; }
+    .el-input-number { width: 1.4rem; }
     .el-radio { margin-right: 0.15rem; }
     .el-radio__label { padding-left: 0.05rem; }
     .page-wrapper {
@@ -81,7 +81,7 @@
       text-align: left;
     }
     .page-wrapper dl dd.value {
-      flex: 0 0 1.2rem;
+      flex: 0 0 1.4rem;
     }
     .page-wrapper dl dd.tip {
       flex: auto;
@@ -110,7 +110,7 @@
       <header>AK值计算</header>
       <dl>
         <dt>胜<i style="margin-right: 2em"></i>率:</dt>
-        <dd class="value"><el-input-number v-model="odds" :min="0" :max="100" :step="1" size="mini"></el-input-number></dd>
+        <dd class="value"><el-input-number v-model="odds" :min="0" :max="100" :step="1" size="small"></el-input-number></dd>
         <dd class="tip">百分比, 获胜的概率</dd>
       </dl>
       <dl>
@@ -123,38 +123,38 @@
       <template v-if="mode === 'RATIO'">
         <dl>
           <dt>盈<i style="margin-right: 0.5em"></i>利<i style="margin-right: 0.5em"></i>率:</dt>
-          <dd class="value"><el-input-number v-model="win" :min="0" :step="1" size="mini"></el-input-number></dd>
-          <dd class="tip">百分比, 获胜时盈利的比例</dd>
+          <dd class="value"><el-input-number v-model="win" :min="0" :step="1" size="small"></el-input-number></dd>
+          <dd class="tip">百分比, 获胜时盈利比例</dd>
         </dl>
         <dl>
           <dt>亏<i style="margin-right: 0.5em"></i>损<i style="margin-right: 0.5em"></i>率:</dt>
-          <dd class="value"><el-input-number v-model="loss" :min="0" :step="1" size="mini"></el-input-number></dd>
-          <dd class="tip">百分比, 失败时亏损的比例</dd>
+          <dd class="value"><el-input-number v-model="loss" :min="0" :step="1" size="small"></el-input-number></dd>
+          <dd class="tip">百分比, 失败时亏损比例</dd>
         </dl>
       </template>
       <template v-else>
         <dl>
           <dt>本<i style="margin-right: 2em"></i>金:</dt>
-          <dd class="value"><el-input-number v-model="capital" :min="0" :step="1" size="mini"></el-input-number></dd>
-          <dd class="tip">元(>=0), 获胜时盈利的比例</dd>
+          <dd class="value"><el-input-number v-model="capital" :min="0" :step="1" size="small"></el-input-number></dd>
+          <dd class="tip">元(>=0), 投入金额</dd>
         </dl>
         <dl>
           <dt>盈<i style="margin-right: 0.5em"></i>利<i style="margin-right: 0.5em"></i>额:</dt>
-          <dd class="value"><el-input-number v-model="win$" :min="0" :step="1" size="mini"></el-input-number></dd>
-          <dd class="tip">元(>=0), 获胜时盈利的金额</dd>
+          <dd class="value"><el-input-number v-model="win$" :min="0" :step="1" size="small"></el-input-number></dd>
+          <dd class="tip">元(>=0), 获胜时盈利金额</dd>
         </dl>
         <dl>
           <dt>亏<i style="margin-right: 0.5em"></i>损<i style="margin-right: 0.5em"></i>额:</dt>
-          <dd class="value"><el-input-number v-model="loss$" :min="0" :step="1" size="mini"></el-input-number></dd>
-          <dd class="tip">元(>=0), 失败时亏损的金额</dd>
+          <dd class="value"><el-input-number v-model="loss$" :min="0" :step="1" size="small"></el-input-number></dd>
+          <dd class="tip">元(>=0), 失败时亏损金额</dd>
         </dl>
       </template>
       <dl>
         <dt>周<i style="margin-right: 2em"></i>期: </dt>
         <dd class="value">
-          <el-input-number v-model="period" :min="1" :step="1" size="mini"></el-input-number>
+          <el-input-number v-model="period" :min="1" :step="1" size="small"></el-input-number>
         </dd>
-        <dd class="tip">天(>=1), 投资回报所用天数</dd>
+        <dd class="tip">天(>=1), 投资回报天数</dd>
       </dl>
       <dl>
         <dt>支持复利:</dt>
@@ -165,20 +165,20 @@
       <dl v-show="supportCycle">
         <dt>复利期数:</dt>
         <dd class="value">
-          <el-input-number v-model="cycles" :min="1" :step="1" size="mini"></el-input-number>
+          <el-input-number v-model="cycles" :min="1" :step="1" size="small"></el-input-number>
         </dd>
         <dd class="tip">期(>=1)</dd>
-      </dl>
-      <dl>
-        <dt>凯<i style="margin-right: 0.5em"></i>利<i style="margin-right: 0.5em"></i>值:</dt>
-        <dd class="value">
-          {{($kelly * 100.0).toFixed(2)}}%
-        </dd>
       </dl>
       <dl>
         <dt>平均年化:</dt>
         <dd class="value">
           {{($avg * 100.0).toFixed(2)}}%
+        </dd>
+      </dl>
+      <dl>
+        <dt>凯<i style="margin-right: 0.5em"></i>利<i style="margin-right: 0.5em"></i>值:</dt>
+        <dd class="value">
+          {{($kelly * 100.0).toFixed(2)}}%
         </dd>
       </dl>
       <div class="ak">
@@ -217,7 +217,7 @@
       el: '#hobbit_app',
       data() {
         return {
-          CPI_PER_YEAR: 0.06,
+          CPI: 0.06,
           mode: 'RATIO',
           odds: 50,
           win: 20,
@@ -234,14 +234,19 @@
         $AK() {
           const a = this.$avg;
           const k = this.$kelly;
-          return Math.tanh(a + k - this.CPI_PER_YEAR) * 50 + 50;
+          return Math.tanh((a + k) / 2.0 - this.CPI) * 50 + 50;
         },
         // 凯利值 = 胜率 - (1 - 胜率) / 盈亏比
         $kelly() {
-          return this.$odds - (1 - this.$odds) / this.$plr;
+          if (this.$plr === 0 || this.$odds === 0) return 0;
+          const k = this.$odds - (1 - this.$odds) / this.$plr;
+          if (k > 1e8) return 1e8;
+          if (k < -1e8) return -1e8;
+          return k;
         },
         // 盈亏比(赔率)
         $plr() {
+          if (this.$win === 0 && this.$loss === 0) return 0;
           return Math.max(this.$win, Number.EPSILON) / Math.max(this.$loss, Number.EPSILON);
         },
         // 年化收益率
