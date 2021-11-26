@@ -255,7 +255,7 @@
         $geo() {
           const geo = Math.pow(1 + this.$win, this.$odds) * Math.pow(1 - this.$loss, 1 - this.$odds) - 1;
           if (geo > 1e8) return 1e8;
-          if (geo < 1e8) return -1e8;
+          if (geo < -1e8) return -1e8;
           return geo;
         },
         $cycles() {
