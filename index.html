@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html version="2021-11-26">
+<html version="2021-11-27">
 <head>
   <title>AK47.XYZ</title>
   <meta name="keywords" content="xiaoyu.li">
@@ -238,7 +238,7 @@
         },
         // 凯利值 = 胜率 - (1 - 胜率) / 盈亏比
         $kelly() {
-          if (this.$win === 0 || this.$odds === 0) return 0;
+          if (this.$win === 0 && this.$loss === 0) return 0;
           const k = this.$odds - (1 - this.$odds) / this.$plr;
           if (k > 1e8) return 1e8;
           if (k < -1e8) return -1e8;
@@ -271,15 +271,13 @@
           return Math.min(Math.max(this.odds / 100.0, 0), 100);
         },
         $win() {
-          if (this.mode === 'YUAN') {
-            return Math.max(this.win$, 0) / Math.max(this.capital, Number.EPSILON);
-          }
+          if (this.$odds === 0) return 0;
+          if (this.mode === 'YUAN') return Math.max(this.win$, 0) / Math.max(this.capital, Number.EPSILON);
           return parseFloat(this.win / 100.0);
         },
         $loss() {
-          if (this.mode === 'YUAN') {
-            return Math.min(Math.max(this.loss$, 0) / Math.max(this.capital, Number.EPSILON), 1);
-          }
+          if (this.$odds === 1) return 0;
+          if (this.mode === 'YUAN') return Math.min(Math.max(this.loss$, 0) / Math.max(this.capital, Number.EPSILON), 1);
           return parseFloat(this.loss / 100.0);
         }
       },
