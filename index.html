@@ -227,7 +227,7 @@
           loss$: 2000,
           period: 365,
           supportCycle: false,
-          cycles: 1,
+          cycles: 5,
         }
       },
       computed: {
@@ -238,7 +238,7 @@
         },
         // 凯利值 = 胜率 - (1 - 胜率) / 盈亏比
         $kelly() {
-          if (this.$plr === 0 || this.$odds === 0) return 0;
+          if (this.$win === 0 || this.$odds === 0) return 0;
           const k = this.$odds - (1 - this.$odds) / this.$plr;
           if (k > 1e8) return 1e8;
           if (k < -1e8) return -1e8;
@@ -246,7 +246,6 @@
         },
         // 盈亏比(赔率)
         $plr() {
-          if (this.$win === 0 && this.$loss === 0) return 0;
           return Math.max(this.$win, Number.EPSILON) / Math.max(this.$loss, Number.EPSILON);
         },
         // 年化收益率
