@@ -227,6 +227,7 @@
         // 年化收益率
         $avg() {
           if (this.cycles === 1) return this.$exp * 365.0 / this.$period;
+          if (this.$loss >= 1) return -this.$loss / this.$cycles * 365.0 / this.$period;
           return (Math.pow(1 + this.$geo, this.$cycles) - 1) / this.$cycles * 365.0 / this.$period;
         },
         // 算数平均收益率 = 胜率 * 盈利率 - (1 - 胜率) * 亏损率
