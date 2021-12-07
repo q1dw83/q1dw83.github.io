@@ -57,7 +57,7 @@
           for (var key in pos.coords) {
             poi.push(key + ' = ' + pos.coords[key]);
           }
-          content.innerHTML += '<br>POI: ' + poi.join(', ')
+          content.innerHTML += '<br>POI:<br>' + poi.join('<br>')
         }
       }, function (error) {
         console.log(error);
