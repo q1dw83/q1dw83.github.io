@@ -1,85 +1,69 @@
 <!DOCTYPE html>
-<html version="2021-11-15">
+<html version="2021-12-07">
 <head>
-    <title>UA.CX</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <meta id="viewport" name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-    <meta name="format-detection" content="telphone=no,email=no" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="icon shortcut bookmark" type="image/ico"
-        href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
-    <style type="text/css">
-        html,
-        body {
-            font-family: PingFang, Arial, sans-serif;
-            font-size: 16px;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            display: flex;
-            flex-flow: column;
-        }
-
-        .title {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 18px;
-            line-height: 50px;
-        }
-
-        .title b {
-            color: #f00;
-        }
-
-        #content {
-            flex: none;
-            padding: 20px;
-            line-height: 20px;
-        }
-    </style>
+  <title>UA.CX</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta id="viewport" name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <meta name="format-detection" content="telphone=no,email=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link rel="icon shortcut bookmark" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
+  <style type="text/css">
+    html,
+    body {
+      font-family: PingFang, Arial, sans-serif;
+      font-size: 16px;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-flow: column;
+    }
+    #content {
+      flex: none;
+      padding: 20px;
+      line-height: 20px;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="title">用户(<b>U</b>ser) 代理(<b>A</b>gent) <b>●</b> 查(<b>C</b>ha) 询(<b>X</b>un)</div>
-    <div id="content"></div>
-    <script>
-        var content = document.getElementById('content');
-        var server = "{SERVER}";
-        var tz = '';
-        try { tz = new Intl.DateTimeFormat().resolvedOptions().timeZone } catch { }
-        var infos = [];
-        infos.push('<b>UA: ' + navigator.userAgent + '</b><br>');
-        infos.push('IP: ' + server.ip);
-        infos.push('Client Time: ' + new Date().toString());
-        infos.push('Server Time: ' + new Date(server.time).toString());
-        if (tz) infos.push('Timezone: ' + tz);
-        infos.push('Lang: ' + navigator.languages.join(', '));
-        infos.push('Screen: ' + (window.screen.availWidth || window.screen.width)
-            + ' x ' + (window.screen.availHeight || window.screen.height)
-            + ' (doc: ' + (document.documentElement.clientWidth || document.body.clientWidth)
-            + ' x ' + (document.documentElement.clientHeight || document.body.clientHeight) + ') '
-            + '@' + window.screen.colorDepth
-            + ' DPR ' + window.devicePixelRatio);
+  <div id="content"></div>
+  <script>
+    var content = document.getElementById('content');
+    var server = "{SERVER}";
+    var tz = '';
+    try { tz = new Intl.DateTimeFormat().resolvedOptions().timeZone } catch { }
+    var infos = [];
+    infos.push('<b>UA: ' + navigator.userAgent + '</b><br>');
+    infos.push('IP: ' + server.ip);
+    infos.push('Client Time: ' + new Date().toString());
+    infos.push('Server Time: ' + new Date(server.time).toString());
+    if (tz) infos.push('Timezone: ' + tz);
+    infos.push('Lang: ' + navigator.languages.join(', '));
+    infos.push('Screen: ' + (window.screen.availWidth || window.screen.width)
+      + ' x ' + (window.screen.availHeight || window.screen.height)
+      + ' (doc: ' + (document.documentElement.clientWidth || document.body.clientWidth)
+      + ' x ' + (document.documentElement.clientHeight || document.body.clientHeight) + ') '
+      + '@' + window.screen.colorDepth
+      + ' DPR ' + window.devicePixelRatio);
 
-        content.innerHTML = infos.join('<br>')
+    content.innerHTML = infos.join('<br>')
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (pos) {
-                if (pos.coords) {
-                    var poi = [];
-                    for (var key in pos.coords) {
-                        poi.push(key + ' = ' + pos.coords[key]);
-                    }
-                    content.innerHTML += '<br>POI: ' + poi.join(', ')
-                }
-            }, function (error) {
-                console.log(error);
-            });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        if (pos.coords) {
+          var poi = [];
+          for (var key in pos.coords) {
+            poi.push(key + ' = ' + pos.coords[key]);
+          }
+          content.innerHTML += '<br>POI: ' + poi.join(', ')
         }
-    </script>
+      }, function (error) {
+        console.log(error);
+      });
+    }
+  </script>
 </body>
+
 </html>
