@@ -212,10 +212,12 @@
           e.preventDefault();
           this.running = true;
           let v = null;
-          let code = this.code.replace(/[×÷π]/g, c => ({
+          let code = this.code.replace(/[×÷π（）]/g, c => ({
             '×': '*',
             '÷': '/',
             'π': 'PI',
+            '（': '(',
+            '）': ')',
           })[c]);
 
           try {
@@ -250,5 +252,6 @@
       },
     })
   </script>
+  <script async src="https://hm.baidu.com/hm.js?6119411ee60d932530ff9f1d3af6e8d6"></script>
 </body>
 </html>
