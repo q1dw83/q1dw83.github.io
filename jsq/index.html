@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html version="2021-12-10">
+<html version="2021-12-11">
 <head>
   <title>计算器 - JSQ.ONE</title>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -70,7 +70,7 @@
     .result .run {
       flex: 0 0 1rem;
       text-align: center;
-      border: 1px solid #fff;
+      border: 1px dashed #fff;
       color: #fff;
       display: flex;
       align-items: center;
@@ -95,17 +95,20 @@
       justify-content: space-around;
       padding-bottom: 0.1rem;
     }
-    .operate b {
-      margin: 0.1rem 0.05rem 0;
+    .operate a {
+      margin: 0.1rem 0 0;
       color: #fff;
       text-align: center;
-      width: 0.5rem;
+      width: 14%;
       height: 0.5rem;
-      line-height: 0.51rem;
+      line-height: 0.5rem;
       border: 1px dashed #fff;
       font-size: 0.24rem;
       font-weight: normal;
       cursor: pointer;
+    }
+    .operate a:active {
+      background-color: #666;
     }
     @media screen and (min-width: 415px) {
       .operate {
@@ -129,40 +132,40 @@
       <div class="run" :class="{ running }" @click="run">=</div>
     </section>
     <section class="operate">
-      <b @touchstart="v('1', $event)">1</b>
-      <b @touchstart="v('2', $event)">2</b>
-      <b @touchstart="v('3', $event)">3</b>
-      <b @touchstart="v('4', $event)">4</b>
-      <b @touchstart="v('5', $event)">5</b>
-      <b @touchstart="v('6', $event)">6</b>
+      <a @touchstart="clear">C</a>
+      <a @touchstart="v('0x', $event)">0x</a>
+      <a @touchstart="v('1', $event)">1</a>
+      <a @touchstart="v('2', $event)">2</a>
+      <a @touchstart="v('3', $event)">3</a>
+      <a @touchstart="remove">←</a>
 
-      <b @touchstart="v('7', $event)">7</b>
-      <b @touchstart="v('8', $event)">8</b>
-      <b @touchstart="v('9', $event)">9</b>
-      <b @touchstart="v('0', $event)">0</b>
-      <b @touchstart="v('.', $event)">.</b>
-      <b @touchstart="v('\n', $event)">↵</b>
-      
-      <b @touchstart="v('+', $event)">+</b>
-      <b @touchstart="v('-', $event)">-</b>
-      <b @touchstart="v('×', $event)">×</b>
-      <b @touchstart="v('÷', $event)">÷</b>
-      <b @touchstart="v('**', $event)">**</b>
-      <b @touchstart="v('%', $event)">%</b>
-      
-      <b @touchstart="v('π', $event)">π</b>
-      <b @touchstart="v('E', $event)">E</b>
-      <b @touchstart="v('random()', $event)">R</b>
-      <b @touchstart="v('(', $event)">(</b>
-      <b @touchstart="v(')', $event)">)</b>
-      <b @touchstart="remove">←</b>
+      <a @touchstart="v('&', $event)">&</a>
+      <a @touchstart="v('|', $event)">|</a>
+      <a @touchstart="v('4', $event)">4</a>
+      <a @touchstart="v('5', $event)">5</a>
+      <a @touchstart="v('6', $event)">6</a>
+      <a @touchstart="v('.', $event)">.</a>
 
-      <b @touchstart="v('~', $event)">~</b>
-      <b @touchstart="v('^', $event)">^</b>
-      <b @touchstart="v('&', $event)">&</b>
-      <b @touchstart="v('|', $event)">|</b>
-      <b @touchstart="v('!', $event)">!</b>
-      <b @touchstart="clear">C</b>
+      <a @touchstart="v('^', $event)">^</a>
+      <a @touchstart="v('~', $event)">~</a>
+      <a @touchstart="v('7', $event)">7</a>
+      <a @touchstart="v('8', $event)">8</a>
+      <a @touchstart="v('9', $event)">9</a>
+      <a @touchstart="v('0', $event)">0</a>
+
+      <a @touchstart="v('%', $event)">%</a>
+      <a @touchstart="v('**', $event)">**</a>
+      <a @touchstart="v('÷', $event)">÷</a>
+      <a @touchstart="v('×', $event)">×</a>
+      <a @touchstart="v('-', $event)">-</a>
+      <a @touchstart="v('+', $event)">+</a>
+      
+      <a @touchstart="v('random()', $event)">R</a>
+      <a @touchstart="v('π', $event)">π</a>
+      <a @touchstart="v('E', $event)">E</a>
+      <a @touchstart="v('(', $event)">(</a>
+      <a @touchstart="v(')', $event)">)</a>
+      <a @touchstart="v('\n', $event)">↵</a>
     </section>
   </div>
   <script type="text/javascript">
