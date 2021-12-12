@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html version="2021-12-11">
+<html version="2021-12-12">
 <head>
   <title>计算器 - JSQ.ONE</title>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -222,6 +222,9 @@
 
           try {
             v = window.eval(code);
+            if (v && /^\d+\.\d{8,}$/g.test(v)) {
+              v = Math.round(v * 1e10) / 1e10;
+            }
           } catch (ex) {
             console.log(ex);
             v = 'Error';
