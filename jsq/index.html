@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html version="2021-12-13">
+<html version="2021-12-14">
 <head>
   <title>1号计算器 - JSQ.ONE</title>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-  <meta id="viewport" name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta id="viewport" name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
   <meta name="format-detection" content="telphone=no,email=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="theme-color" content="#000">
@@ -112,6 +112,10 @@
     .operate a:active {
       background-color: #666;
     }
+    .safe-bottom {
+      flex: 0 0 constant(safe-area-inset-bottom);
+      flex: 0 0 env(safe-area-inset-bottom);
+    }
     @media screen and (min-width: 415px) {
       .operate {
         display: none;
@@ -169,6 +173,7 @@
       <a @touchstart="v(')', $event)">)</a>
       <a @touchstart="v('\n', $event)">↵</a>
     </section>
+    <section class="safe-bottom"></section>
   </div>
   <script type="text/javascript">
     (function() {
