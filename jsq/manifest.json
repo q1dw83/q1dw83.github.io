@@ -1,0 +1,17 @@
+{
+    "name": "1号计算器 - JSQ.ONE",
+    "short_name": "1号计算器",
+    "description": "1号计算器",
+    "lang": "zh-cn",
+    "icons": [
+      {
+        "src": "https://jsq.one/jsq.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#000",
+    "background_color": "#000"
+  }

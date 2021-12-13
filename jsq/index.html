@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html version="2021-12-12">
+<html version="2021-12-13">
 <head>
   <title>1号计算器 - JSQ.ONE</title>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
   <meta id="viewport" name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta name="format-detection" content="telphone=no,email=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <link rel="icon shortcut bookmark" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAq1BMVEUAAABEg/NFhvZEg/Moy7UpzLYpzLcrzrYoy7MqzbcozLVFhfVEhvVGhPVBg/JFhvVFhvZEhPRFhfVCgu9FhfRGhvVEhfVDg/VFhPVFhfREhPRGhfNGhvVFhfQpzLYozLYpzLYpzbcpzLYpzLYpzbcpzLdFhPYpzLcpy7lHiPcqzbgpyLMpzLYpzLYpzLYpzbYpzLYozLYpy7Uqy7UpzLZFhvYnzbdFhfUpzLbDSG+aAAAAN3RSTlMAgL9AgL/UKkBVqt2UFyflu3doEPCDf0jMqnBYUDDx57ecinRqX1VKIh4YDPrezcalkzozrokuNjiCpAAAAzBJREFUeNrt3dly2kAQheEWjBeZJYAh2CzZYxtnj5OM3v/J0oTCRJlRS0oK6FbOf6urrwZJMyqqmhBCCCGE0HG6XC5miZJmi+Xl3yGm3zteWZ3uzYrq1UueeJ11+1QjtQxuPKHKDbzqBlQxdffGn3WoUt5AVKErb6ArKu3am+iaSkq8kSYk1lP83M037jdjQbzvktClmQXhpCW58YYaCpCuN1TL8js9V6/4FvGmmlJRS2+qORW18KYaUVEzb6phrdchKcmHJYDUCBBAAJEDBBBA5AABBJB1ST7aZQzSKvwaAAgggAACCCCAcIAAAohtSOKr16ag86x6DhBAAAEEEEAAAQQQQI4MaeXLb+PzxSAn1XM4jwACCCCAAAIIIIAAAsg+IO18tMsYpDhAAAFEDhBAAJEDBBBA5OxAziheSkLtOh0G4k7jkjRLJYivXnIQiMuyqOT2fZalhiDs2EoCB0vMQNgRldw+21xIjUDYEZWcs2NTagLCjpwkdLDEAIQdUcnX579fSNVD2BFIQgdLlEPYEZU8sCNfqhrCjqjk4UN4IdUMKZD8YIetFSmQnGZBb5XfI1FJzKH+qRWVhA4D75EqkjdUAEmqd7C9VrnDwMHKlTtsQETJa1pnBEKuzGEFQq7EYQZCTv4Dnx0IOclhCJLbl4TnEzMQdsT6eEebrEA2jrqSdqt6yUEg7Cjq052h71qCgyX3ZiDskDq5NwIJHKHEBIQdZb14ZwASOOIS9ZCYw8UkyiFRB0Uk3/4V8nQvENlB9CoLulC9IgyJOKKSC9UrwpLQEZVc6P5pBRJH277kHeqfWiwJHKGEHdpXZCMJHdxLwVF/97t/CEsCx1aSd6g/j7Bk6wglW4cFyEbiKOzzzmECwpKogyWPDhsQOnMU79FhBFIWIIAAIgcIIIDIAQIIIHKAAAKIHCCANHIgV2NGpDVmaF1jxgg2ZrCjrVGbg6YMPx0JkJU31IqaMca1S1L9sTfSuE9iE2+kifGx/9sGDRj8v67zP43+NzD8/4p+ZX78/zVVLlE8p308oRr11FK6fapXb6TwQdwaCgzBMp2PhomShqP5tEcIIYQQQugY/QRWUvD5LMhU/QAAAABJRU5ErkJggg==">
-  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAq1BMVEUAAABEg/NFhvZEg/Moy7UpzLYpzLcrzrYoy7MqzbcozLVFhfVEhvVGhPVBg/JFhvVFhvZEhPRFhfVCgu9FhfRGhvVEhfVDg/VFhPVFhfREhPRGhfNGhvVFhfQpzLYozLYpzLYpzbcpzLYpzLYpzbcpzLdFhPYpzLcpy7lHiPcqzbgpyLMpzLYpzLYpzLYpzbYpzLYozLYpy7Uqy7UpzLZFhvYnzbdFhfUpzLbDSG+aAAAAN3RSTlMAgL9AgL/UKkBVqt2UFyflu3doEPCDf0jMqnBYUDDx57ecinRqX1VKIh4YDPrezcalkzozrokuNjiCpAAAAzBJREFUeNrt3dly2kAQheEWjBeZJYAh2CzZYxtnj5OM3v/J0oTCRJlRS0oK6FbOf6urrwZJMyqqmhBCCCGE0HG6XC5miZJmi+Xl3yGm3zteWZ3uzYrq1UueeJ11+1QjtQxuPKHKDbzqBlQxdffGn3WoUt5AVKErb6ArKu3am+iaSkq8kSYk1lP83M037jdjQbzvktClmQXhpCW58YYaCpCuN1TL8js9V6/4FvGmmlJRS2+qORW18KYaUVEzb6phrdchKcmHJYDUCBBAAJEDBBBA5AABBJB1ST7aZQzSKvwaAAgggAACCCCAcIAAAohtSOKr16ag86x6DhBAAAEEEEAAAQQQQI4MaeXLb+PzxSAn1XM4jwACCCCAAAIIIIAAAsg+IO18tMsYpDhAAAFEDhBAAJEDBBBA5OxAziheSkLtOh0G4k7jkjRLJYivXnIQiMuyqOT2fZalhiDs2EoCB0vMQNgRldw+21xIjUDYEZWcs2NTagLCjpwkdLDEAIQdUcnX579fSNVD2BFIQgdLlEPYEZU8sCNfqhrCjqjk4UN4IdUMKZD8YIetFSmQnGZBb5XfI1FJzKH+qRWVhA4D75EqkjdUAEmqd7C9VrnDwMHKlTtsQETJa1pnBEKuzGEFQq7EYQZCTv4Dnx0IOclhCJLbl4TnEzMQdsT6eEebrEA2jrqSdqt6yUEg7Cjq052h71qCgyX3ZiDskDq5NwIJHKHEBIQdZb14ZwASOOIS9ZCYw8UkyiFRB0Uk3/4V8nQvENlB9CoLulC9IgyJOKKSC9UrwpLQEZVc6P5pBRJH277kHeqfWiwJHKGEHdpXZCMJHdxLwVF/97t/CEsCx1aSd6g/j7Bk6wglW4cFyEbiKOzzzmECwpKogyWPDhsQOnMU79FhBFIWIIAAIgcIIIDIAQIIIHKAAAKIHCCANHIgV2NGpDVmaF1jxgg2ZrCjrVGbg6YMPx0JkJU31IqaMca1S1L9sTfSuE9iE2+kifGx/9sGDRj8v67zP43+NzD8/4p+ZX78/zVVLlE8p308oRr11FK6fapXb6TwQdwaCgzBMp2PhomShqP5tEcIIYQQQugY/QRWUvD5LMhU/QAAAABJRU5ErkJggg==">
+  <meta name="theme-color" content="#000">
+  <link rel="manifest" href="//jsq.one/manifest.json">
+  <link rel="icon shortcut bookmark" href="//jsq.one/jsq.png">
+  <link rel="apple-touch-icon" href="//jsq.one/jsq.png">
   <style type="text/css">
     html{font-size:100px;height:100%;background-color:#000;}
     body{background-color:#000;margin:0;padding:0;height:100%;
@@ -205,6 +207,9 @@
         const names = Object.getOwnPropertyNames(Math);
         for (const name of names) {
           window[name] = Math[name];
+        }
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js');
         }
       },
       methods: {
