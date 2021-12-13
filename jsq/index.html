@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html version="2021-12-12">
 <head>
-  <title>计算器 - JSQ.ONE</title>
+  <title>1号计算器 - JSQ.ONE</title>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
   <meta id="viewport" name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta name="format-detection" content="telphone=no,email=no">
@@ -119,7 +119,7 @@
 </head>
 <body>
   <div id="hobbit_loading"></div>
-  <div id="hobbit_app" @touchmove="e => e.preventDefault()">
+  <div id="hobbit_app" @touchmove="disableScale">
     <textarea class="code" v-model="code"
       autofocus
       @keypress="onInputTextKeypress"
@@ -237,6 +237,11 @@
             if (e.shiftKey || e.ctrlKey) {
               this.run(e);
             }
+          }
+        },
+        disableScale(e) {
+          if (e.touches.length > 1) {
+            e.preventDefault();
           }
         },
         v(i, e) {
