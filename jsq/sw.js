@@ -1,6 +1,6 @@
 const CACHE_NAME = 'JSQ-CACHE';
 const SETUP_ASSET_URLS = [
-  '/',
+  './',
 ];
 
 self.addEventListener('install', context => {
