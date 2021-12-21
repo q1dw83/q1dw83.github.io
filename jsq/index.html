@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html version="2021-12-18">
+<html version="2021-12-21">
 <head>
-  <title>1号计算器 - JSQ.ONE</title>
+  <title>1号计算器</title>
+  <meta name="keywords" content="1号计算器">
+  <meta name="description" content="1号计算器 - https://JSQ.ONE">
+  <meta property="og:title" content="1号计算器">
+  <meta property="og:description" content="1号计算器 - https://JSQ.ONE">
+  <meta property="og:image" content="jsq.png">
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-  <meta id="viewport" name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+  <meta id="viewport" name="viewport"
+    content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
   <meta name="format-detection" content="telphone=no,email=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="theme-color" content="#000">
@@ -11,28 +17,112 @@
   <link rel="icon shortcut bookmark" href="jsq.png">
   <link rel="apple-touch-icon" href="jsq.png">
   <style type="text/css">
-    html{font-size:100px;height:100%;background-color:#000;}
-    body{background-color:#000;margin:0;padding:0;height:100%;
-      scroll-behavior:smooth;
-      user-select:none;
-      -webkit-user-select:none;
-      -webkit-touch-callout:none;
-      -webkit-overflow-scrolling:touch;
-      -webkit-font-smoothing:antialiased;
-      -webkit-tap-highlight-color:rgba(255, 255, 255, 0);
-      font-size:0.16rem;
+    html {
+      font-size: 100px;
+      height: 100%;
+      background-color: #000;
     }
-    input, select, textarea {user-select:text !important;outline:medium;}
-    input[type=text], input[type=tel], input[type=password], input[type=search] {-webkit-appearance: none;}
-    @keyframes hobbit_startup_loading{0%{visibility:visible;transform:rotate(0)}100%{transform:rotate(360deg)}}
-    #hobbit_loading{display:block;position:relative;top:50%;margin:-50px auto;width:100px;height:100px}
-    #hobbit_loading::before,#hobbit_loading::after{content:'';position:absolute;border-radius:50%;border:2px solid #fff;box-sizing:border-box;visibility:hidden;animation:hobbit_startup_loading 1s linear 1s infinite}
-    body.-error-::before{content:'Network error,click to reload';position:absolute;display:block;top:0;bottom:0;left:0;right:0;margin:auto;width:300px;height:40px;padding-top:160px;background:url(//7z.ink/img/sorry.png) no-repeat center top;background-size:100%;font-size:24px;text-align:center;cursor:pointer}
-    body.-error- #hobbit_loading,body.-ready- #hobbit_loading,.-seo-{display:none}
-    #hobbit_loading::before{border-color:#df1317 transparent;width:80%;height:80%;top:10%;left:10%}
-    #hobbit_loading::after{border-color:transparent #e4934b;width:60%;height:60%;top:20%;left:20%;animation-direction:reverse}
-    #hobbit_app{display:none;height:100%;position:fixed;top:0;left:0;right:0;width:100%;}
-    body.-ready- #hobbit_app{
+    body {
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      scroll-behavior: smooth;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-overflow-scrolling: touch;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      font-size: 0.16rem;
+    }
+    input,
+    select,
+    textarea {
+      user-select: text !important;
+      outline: medium;
+    }
+    input[type=text],
+    input[type=tel],
+    input[type=password],
+    input[type=search] {
+      -webkit-appearance: none;
+    }
+    @keyframes hobbit_startup_loading {
+      0% {
+        visibility: visible;
+        transform: rotate(0)
+      }
+      100% {
+        transform: rotate(360deg)
+      }
+    }
+    #hobbit_loading {
+      display: block;
+      position: relative;
+      top: 50%;
+      margin: -50px auto;
+      width: 100px;
+      height: 100px
+    }
+    #hobbit_loading::before,
+    #hobbit_loading::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-sizing: border-box;
+      visibility: hidden;
+      animation: hobbit_startup_loading 1s linear 1s infinite
+    }
+    body.-error-::before {
+      content: 'Network error,click to reload';
+      position: absolute;
+      display: block;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 300px;
+      height: 40px;
+      padding-top: 160px;
+      background: url(//7z.ink/img/sorry.png) no-repeat center top;
+      background-size: 100%;
+      font-size: 24px;
+      text-align: center;
+      cursor: pointer
+    }
+    body.-error- #hobbit_loading,
+    body.-ready- #hobbit_loading,
+    .-seo- {
+      display: none
+    }
+    #hobbit_loading::before {
+      border-color: #df1317 transparent;
+      width: 80%;
+      height: 80%;
+      top: 10%;
+      left: 10%
+    }
+    #hobbit_loading::after {
+      border-color: transparent #e4934b;
+      width: 60%;
+      height: 60%;
+      top: 20%;
+      left: 20%;
+      animation-direction: reverse
+    }
+    #hobbit_app {
+      display: none;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+    body.-ready- #hobbit_app {
       display: flex;
       flex-direction: column;
       font-family: Menlo, Monaco, monospace;
@@ -123,18 +213,14 @@
     }
   </style>
 </head>
+
 <body>
   <div id="hobbit_loading"></div>
   <div id="hobbit_app" @touchmove="disableScale">
-    <textarea class="code" v-model="code"
-      autofocus
-      @keypress="onInputTextKeypress"
-      placeholder="输入计算表达式">
+    <textarea class="code" v-model="code" autofocus @keypress="onInputTextKeypress" placeholder="输入计算表达式">
     </textarea>
     <section class="result">
-      <textarea class="value"
-        placeholder="计算结果"
-        readonly v-model="value"></textarea>
+      <textarea class="value" placeholder="计算结果" readonly v-model="value"></textarea>
       <div class="run" :class="{ running }" @click="run">=</div>
     </section>
     <section class="operate">
@@ -144,34 +230,34 @@
       <a @touchstart="v('3', $event)">3</a>
       <a @touchstart="v('+', $event)">+</a>
 
-      <a @touchstart="v('(', $event)">(</a>
+      <a @touchstart="v('π', $event)">π</a>
       <a @touchstart="v('4', $event)">4</a>
       <a @touchstart="v('5', $event)">5</a>
       <a @touchstart="v('6', $event)">6</a>
       <a @touchstart="v('-', $event)">-</a>
 
-      <a @touchstart="v(')', $event)">)</a>
+      <a @touchstart="v('E', $event)">E</a>
       <a @touchstart="v('7', $event)">7</a>
       <a @touchstart="v('8', $event)">8</a>
       <a @touchstart="v('9', $event)">9</a>
       <a @touchstart="v('×', $event)">×</a>
 
+      <a @touchstart="v('random()', $event)">R</a>
       <a @touchstart="v('^', $event)">^</a>
-      <a @touchstart="v('%', $event)">%</a>
       <a @touchstart="v('.', $event)">.</a>
       <a @touchstart="v('0', $event)">0</a>
       <a @touchstart="v('÷', $event)">÷</a>
 
       <a @touchstart="clear">C</a>
-      <a @touchstart="v('random()', $event)">R</a>
-      <a @touchstart="v('π', $event)">π</a>
-      <a @touchstart="v('E', $event)">E</a>
-      <a @touchstart="v('\n', $event)">↵</a>      
+      <a @touchstart="v('%', $event)">%</a>
+      <a @touchstart="v('(', $event)">(</a>
+      <a @touchstart="v(')', $event)">)</a>
+      <a @touchstart="v('\n', $event)">↵</a>
     </section>
     <section class="safe-bottom"></section>
   </div>
   <script type="text/javascript">
-    (function() {
+    (function () {
       var w = window.screen.availWidth || window.screen.width;
       if (w < 640) {
         document.documentElement.style.fontSize = (w / 4) + 'px';
@@ -181,10 +267,10 @@
       } else if (w > 1920) {
         document.documentElement.style.fontSize = (w / 19.2) + 'px';
       }
-      window.setTimeout(function() {
+      window.setTimeout(function () {
         if (document.body.className.indexOf('-ready-') === -1) {
           document.body.className = '-error-';
-          document.body.addEventListener('click', function() {
+          document.body.addEventListener('click', function () {
             window.location.reload();
           });
         }
@@ -268,4 +354,5 @@
   </script>
   <script async src="https://hm.baidu.com/hm.js?6119411ee60d932530ff9f1d3af6e8d6"></script>
 </body>
+
 </html>
