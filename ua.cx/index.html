@@ -33,21 +33,22 @@
     var content = document.getElementById('content');
     var server = "{SERVER}";
     var tz = '';
-    try { tz = new Intl.DateTimeFormat().resolvedOptions().timeZone } catch { }
+    try {
+      tz = new Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch(ex) { console.log(ex); }
     var infos = [];
     infos.push('<b>UA: ' + navigator.userAgent + '</b><br>');
     infos.push('IP: ' + server.ip);
     infos.push('Client Time: ' + new Date().toString());
     infos.push('Server Time: ' + new Date(server.time).toString());
     if (tz) infos.push('Timezone: ' + tz);
-    infos.push('Lang: ' + navigator.languages.join(', '));
+    infos.push('Lang: ' + (navigator.languages || [navigator.language]).join(', '));
     infos.push('Screen: ' + (window.screen.availWidth || window.screen.width)
       + ' x ' + (window.screen.availHeight || window.screen.height)
       + ' (doc: ' + (document.documentElement.clientWidth || document.body.clientWidth)
       + ' x ' + (document.documentElement.clientHeight || document.body.clientHeight) + ') '
       + '@' + window.screen.colorDepth
       + ' DPR ' + window.devicePixelRatio);
-
     content.innerHTML = infos.join('<br>')
 
     if (navigator.geolocation) {
