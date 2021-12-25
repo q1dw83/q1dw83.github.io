@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html version="2021-12-11">
+<html version="2021-12-25">
 <head>
   <title>COPY.CX</title>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -24,7 +24,7 @@
     @keyframes hobbit_startup_loading{0%{visibility:visible;transform:rotate(0)}100%{transform:rotate(360deg)}}
     #hobbit_loading{display:block;position:relative;top:50%;margin:-50px auto;width:100px;height:100px}
     #hobbit_loading::before,#hobbit_loading::after{content:'';position:absolute;border-radius:50%;border:2px solid #fff;box-sizing:border-box;visibility:hidden;animation:hobbit_startup_loading 1s linear 1s infinite}
-    body.-error-::before{content:'Network error,click to reload';position:absolute;display:block;top:0;bottom:0;left:0;right:0;margin:auto;width:300px;height:40px;padding-top:160px;background:url(//s.vipkidstatic.com/fe-static/hobbit/asset/res/image/error-v4.png) no-repeat center top;background-size:100%;font-size:24px;text-align:center;cursor:pointer}
+    body.-error-::before{content:'Network error,click to reload';position:absolute;display:block;top:0;bottom:0;left:0;right:0;margin:auto;width:300px;height:40px;padding-top:160px;background:url(//7z.ink/img/sorry.png) no-repeat center top;background-size:100%;font-size:24px;text-align:center;cursor:pointer}
     body.-error- #hobbit_loading,body.-ready- #hobbit_loading,.-seo-{display:none}
     #hobbit_loading::before{border-color:#df1317 transparent;width:80%;height:80%;top:10%;left:10%}
     #hobbit_loading::after{border-color:transparent #e4934b;width:60%;height:60%;top:20%;left:20%;animation-direction:reverse}
@@ -282,6 +282,14 @@
       },
     })
   </script>
-  <script async src="https://hm.baidu.com/hm.js?94f7c6be1d64597bfd28706e8f2c527f"></script>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?94f7c6be1d64597bfd28706e8f2c527f";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 </body>
 </html>
